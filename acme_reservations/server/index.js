@@ -31,19 +31,27 @@ app.get('/api/restaurants', async (req, res, next)=>{
         next(error)
     }
 })
+//get reservations
+app.get('/api/reservations', async (req, res, next)=>{
+    try {
+        res.send(await fetchReservations())
+    } catch (error) {
+        next(error)
+    }
+})
 //post new reservation
 app.post('/api/customers/:customer_id/reservations', async (req, res, next)=>{
     try {
         const customer_id = req.params.customer_id
         const restaurant_id = req.body.restaurant_id
         const date = req.body.date
-        res.send(await createReservation(customer_id, restaurant_id, date))
+        res.send(await createReservation(customer_id, restaurant_id, date)) && res.sendStatus(201)
     } catch (error) {
         next(error)
     }
 })
 //delete reservation
-app.delete('/api/customers/:customer_id/reservations', async (req, res, next)=>{
+app.delete('/api/customers/:customer_id/reservations/:id', async (req, res, next)=>{
     try {
         const customerID = req.params.customer_id
         const id = req.params.id
@@ -81,7 +89,6 @@ const init = async()=>{
     const reservations = await fetchReservations();
 
     //await destroyReservation([0].id, users[2].id);
-    //const newReservations = await fetchReservations();
     console.log("and reservations too!:", reservations);
     console.log("the data was seeded!")
 

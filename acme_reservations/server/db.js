@@ -51,6 +51,7 @@ const createRestaurant = async (restaurantName)=>{
 }
 
 const createReservation = async (customer_id, restaurant_id, date, party_count)=>{
+    
     const SQL = `
     INSERT INTO reservations(customer_id, restaurant_id, date, party_count) 
     VALUES($1, $2, $3, $4)
