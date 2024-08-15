@@ -88,6 +88,15 @@ const fetchRestaurants = async ()=>{
     return response.rows;
 }
 
+const fetchReservations = async ()=>{
+    const SQL = `
+    SELECT *
+    FROM reservations;
+    `
+    const response = await client.query(SQL);
+    return response.rows;
+}
+
 
 module.exports = {
     client,
@@ -98,4 +107,5 @@ module.exports = {
     destroyReservation,
     fetchCustomers,
     fetchRestaurants,
+    fetchReservations
 };

@@ -9,6 +9,7 @@ const {
     destroyReservation,
     fetchCustomers,
     fetchRestaurants,
+    fetchReservations
     } = require ('./db');
 const port = process.env.PORT || 3000;
 app.use(express.json());
@@ -77,11 +78,11 @@ const init = async()=>{
         '2024-12-25',
         4
     );
-    //const reservations = await fetchReservations();
+    const reservations = await fetchReservations();
 
     //await destroyReservation([0].id, users[2].id);
-    //const newReservations = await fetchReservations();
-    //console.log("and reservations too!:", reservations);
+    const newReservations = await fetchReservations();
+    console.log("and reservations too!:", reservations);
     console.log("the data was seeded!")
 
     app.listen(port, () => {
