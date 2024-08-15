@@ -81,7 +81,7 @@ const init = async()=>{
     const reservations = await fetchReservations();
 
     //await destroyReservation([0].id, users[2].id);
-    const newReservations = await fetchReservations();
+    //const newReservations = await fetchReservations();
     console.log("and reservations too!:", reservations);
     console.log("the data was seeded!")
 
