@@ -42,12 +42,16 @@ app.get('/api/reservations', async (req, res, next)=>{
 //post new reservation
 app.post('/api/customers/:customer_id/reservations', async (req, res, next)=>{
     try {
-        const customer_id = req.params.customer_id
-        const restaurant_id = req.body.restaurant_id
-        const date = req.body.date
-        res.send(await createReservation(customer_id, restaurant_id, date)) && res.sendStatus(201)
+        const customer_id = req.params.customer_id;
+        const { restaurant_id, date, party_count } = req.body;
+
+        // Create the reservation
+        const newReservation = await createReservation(customer_id, restaurant_id, date, party_count);
+
+        // Send the created reservation with status code 201
+        res.status(201).send(newReservation);
     } catch (error) {
-        next(error)
+        next(error);
     }
 })
 //delete reservation
